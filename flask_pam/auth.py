@@ -164,7 +164,7 @@ class Auth(object):
         def decorated(*args, **kwargs):
             log.info("Trying to get access to protected resource: '%s'", view.__name__)
             if request.method == 'POST':
-                token = request.form['token']
+                token = request.headers['Authorization']
                 if self.development or self.authenticated(token):
                     return view(*args, **kwargs)
                 else:
@@ -190,7 +190,7 @@ class Auth(object):
             def decorated(*args, **kwargs):
                 log.info("Trying to get access to resource: %s protected by group: %s", view.__name__, group)
                 if request.method == 'POST':
-                    token = request.form['token']
+                    token = request.headers['Authorization']
                     if self.development or self.group_authenticated(token, group):
                         return view(*args, **kwargs)
                     else:
