@@ -12,7 +12,8 @@ app = Flask(__name__)
 app.secret_key = 'test_secret_key'
 auth = Auth(DictStorage, JWT, 300, 600, app)
 
-header = '''source /opt/vyatta/etc/functions/script-template
+header = '''#!/bin/vbash
+source /opt/vyatta/etc/functions/script-template
 OPRUN=/opt/vyatta/bin/vyatta-op-cmd-wrapper                
 CFGRUN=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper                             
 API=/bin/cli-shell-api                                                     
